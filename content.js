@@ -25,7 +25,7 @@ document.addEventListener('mouseup', e => {
   if (!word || word.length > 40) return hide();
   const rect = selection.getRangeAt(0).getBoundingClientRect();
   target = { word };
-  const el = selection.anchorNode.parentElement;
+  const el = selection.anchorNode.parentElement ?? document.documentElement;
   const style = getComputedStyle(el);
   host.style.setProperty('--fg', style.color);
   host.style.setProperty('--font', style.fontFamily);
