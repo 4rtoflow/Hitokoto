@@ -46,8 +46,13 @@ button.addEventListener('click', async () => {
   const asked = target;
   button.hidden = true;
   output.textContent = '…';
-  const { text, error } = await chrome.runtime.sendMessage(asked).catch(e => ({ error: e.message }));
-  if (asked === target) output.textContent = text || error;
+  let reply;
+  try {
+    reply = await chrome.runtime.sendMessage(asked);
+  } catch {
+    reply = { error: '拡張機能が更新されました。ページを読み込み直してください' };
+  }
+  if (asked === target) output.textContent = reply.text || reply.error;
 });
 
 function hide() {
