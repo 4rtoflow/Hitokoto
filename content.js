@@ -1,5 +1,5 @@
 const host = document.createElement('div');
-host.style.cssText = 'all:initial;position:absolute;z-index:2147483647;display:none';
+host.style.cssText = 'all:initial;position:absolute;z-index:2147483647;display:none;width:max-content';
 const root = host.attachShadow({ mode: 'open' });
 root.innerHTML = `<style>
   button { display: block; padding: 0; border: 0; background: none; cursor: pointer; }
@@ -34,8 +34,7 @@ document.addEventListener('mouseup', e => {
   output.textContent = '';
   const fromRight = rect.left > innerWidth / 2;
   Object.assign(host.style, { display: 'block', top: `${rect.bottom + scrollY + 6}px`,
-    left: fromRight ? 'auto' : `${rect.left + scrollX}px`,
-    right: fromRight ? `${document.documentElement.clientWidth - rect.right - scrollX}px` : 'auto' });
+    left: `${(fromRight ? rect.right : rect.left) + scrollX}px`, transform: fromRight ? 'translateX(-100%)' : 'none' });
 });
 
 document.addEventListener('mousedown', e => {
