@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "Hitokoto",
+  "version": "0.1.0",
+  "description": "選んだ語を AI が一言で説明する",
+  "permissions": ["storage"],
+  "options_page": "options.html"
+}
