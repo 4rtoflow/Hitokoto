@@ -1,11 +1,11 @@
-const SYSTEM = '選ばれた語を、日本語で一言（20 字程度）で説明する。文脈があれば、その文脈での意味を答える。前置き・語の繰り返し・装飾は書かない。';
+const SYSTEM = '選ばれた語の一般的な意味を、日本語で一言（20 字程度）で説明する。前置き・語の繰り返し・装飾は書かない。';
 
 chrome.runtime.onMessage.addListener((target, _sender, reply) => {
   explain(target).then(text => reply({ text }), e => reply({ error: e.message }));
   return true;
 });
 
-async function explain({ word, context }) {
+async function explain({ word }) {
   const { apiKey } = await chrome.storage.local.get('apiKey');
   if (!apiKey) {
     chrome.runtime.openOptionsPage();
@@ -24,7 +24,7 @@ async function explain({ word, context }) {
       max_tokens: 1024,
       output_config: { effort: 'low' },
       system: SYSTEM,
-      messages: [{ role: 'user', content: `語: ${word}\n文脈: ${context}` }],
+      messages: [{ role: 'user', content: word }],
     }),
   });
   const data = await res.json();

@@ -17,9 +17,8 @@ document.addEventListener('mouseup', e => {
   const selection = getSelection();
   const word = selection.toString().trim();
   if (!word || word.length > 40) return hide();
-  const range = selection.getRangeAt(0);
-  const rect = range.getBoundingClientRect();
-  target = { word, context: contextAround(word, range.commonAncestorContainer) };
+  const rect = selection.getRangeAt(0).getBoundingClientRect();
+  target = { word };
   button.hidden = false;
   output.textContent = '';
   Object.assign(host.style, { display: 'block', top: `${rect.bottom + scrollY + 6}px`, left: `${rect.left + scrollX}px` });
@@ -39,11 +38,4 @@ button.addEventListener('click', async () => {
 
 function hide() {
   host.style.display = 'none';
-}
-
-function contextAround(word, node) {
-  const el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
-  const text = (el.closest('p, li, dd, td, blockquote') ?? el).innerText.replace(/\s+/g, ' ');
-  const i = text.indexOf(word);
-  return i < 0 ? '' : text.slice(Math.max(0, i - 80), i + word.length + 80);
 }
