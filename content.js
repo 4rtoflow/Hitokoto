@@ -32,7 +32,10 @@ document.addEventListener('mouseup', e => {
   host.style.setProperty('--bg', backgroundOf(el));
   button.hidden = false;
   output.textContent = '';
-  Object.assign(host.style, { display: 'block', top: `${rect.bottom + scrollY + 6}px`, left: `${rect.left + scrollX}px` });
+  const fromRight = rect.left > innerWidth / 2;
+  Object.assign(host.style, { display: 'block', top: `${rect.bottom + scrollY + 6}px`,
+    left: fromRight ? 'auto' : `${rect.left + scrollX}px`,
+    right: fromRight ? `${document.documentElement.clientWidth - rect.right - scrollX}px` : 'auto' });
 });
 
 document.addEventListener('mousedown', e => {
