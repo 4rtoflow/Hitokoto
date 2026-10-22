@@ -1,7 +1,30 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>Hitokoto の設定</title>
-<label>Claude API キー <input id="key" type="password" size="40"></label>
-<button id="save">保存</button>
-<span id="status"></span>
+<link rel="icon" href="icons/32.png">
+<style>
+  :root { color-scheme: light dark; --accent: #E5483B; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; font: 16px/1.6 system-ui, sans-serif;
+         background: light-dark(#f6f5f3, #1c1c1e); color: light-dark(#222, #e8e8e8); }
+  form { width: min(640px, 90vw); display: grid; gap: 20px; text-align: center; }
+  img { width: 88px; margin: 0 auto -8px; }
+  h1 { margin: 0; font-size: 32px; }
+  p { margin: 0; color: light-dark(#666, #aaa); }
+  a { color: inherit; }
+  input { font: 22px/1.4 ui-monospace, monospace; padding: 20px 24px; border-radius: 18px; outline: none; color: inherit;
+          border: 1px solid light-dark(#0002, #fff3); background: light-dark(#fff, #2a2a2c); }
+  input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+  button { font: 600 18px/1 system-ui, sans-serif; padding: 18px; border: 0; border-radius: 18px; color: #fff;
+           background: var(--accent); cursor: pointer; }
+  button:hover { filter: brightness(1.08); }
+  #status { min-height: 1.6em; color: var(--accent); }
+</style>
+<form id="form">
+  <img src="icons/128.png" alt="">
+  <h1>Hitokoto</h1>
+  <p>Claude API キーを入れてください。キーは <a href="https://platform.claude.com/" target="_blank">Claude Console</a> で作れます。</p>
+  <input id="key" type="password" placeholder="sk-ant-..." autocomplete="off" autofocus>
+  <button>保存</button>
+  <p id="status"></p>
+</form>
 <script src="options.js"></script>
