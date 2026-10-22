@@ -10,16 +10,20 @@ const SYSTEM = `送られた語の一般的な意味を、日本語の一言（2
 出力: 問題にせず、はねつけること。`;
 const REFUSED = 'この語は説明できませんでした';
 
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason === 'install') chrome.runtime.openOptionsPage();
+});
+
 chrome.runtime.onMessage.addListener((target, _sender, reply) => {
   explain(target).then(text => reply({ text }), e => reply({ error: e.message }));
   return true;
 });
 
 async function explain({ word }) {
-  const { apiKey } = await chrome.storage.local.get('apiKey');
-  if (!apiKey) {
+  const { apiKey, consent } = await chrome.storage.local.get(['apiKey', 'consent']);
+  if (!apiKey || !consent) {
     chrome.runtime.openOptionsPage();
-    throw new Error('設定画面で API キーを入れてください');
+    throw new Error('設定画面で API キーを入れ、送る内容に同意してください');
   }
   return apiKey.startsWith('sk-ant-') ? askClaude(apiKey, word) : askLuna(apiKey, word);
 }
