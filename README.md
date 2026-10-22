@@ -8,9 +8,9 @@ Web 小説などを読んでいて分からない語(日本語の難しい語や
 
 1. Chrome で `chrome://extensions` を開き、右上の「デベロッパー モード」をオンにする
 2. 「パッケージ化されていない拡張機能を読み込む」で、このリポジトリのフォルダを選ぶ
-3. 拡張機能の「詳細」→「拡張機能のオプション」で、Claude API キーを保存する
+3. 拡張機能の「詳細」→「拡張機能のオプション」で、Claude か OpenAI の API キーを保存する
 
-API キーは [Claude Console](https://platform.claude.com/) で作れます。説明 1 回ごとに、キーの持ち主に API の料金がかかります(モデルは Claude Haiku 5.5)。
+API キーは [Claude Console](https://platform.claude.com/) か [OpenAI Platform](https://platform.openai.com/api-keys) で作れます。Claude のキーなら Claude Haiku 5.5、OpenAI のキーなら GPT-6 Luna で答えます。説明 1 回ごとに、キーの持ち主に API の料金がかかります。
 
 ## 使い方
 
