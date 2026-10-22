@@ -1,5 +1,5 @@
 const host = document.createElement('div');
-host.style.cssText = 'position:absolute;z-index:2147483647;display:none';
+host.style.cssText = 'all:initial;position:absolute;z-index:2147483647;display:none';
 const root = host.attachShadow({ mode: 'open' });
 root.innerHTML = `<style>
   div { font: 14px/1.5 system-ui, sans-serif; color: #222; background: #fff; border: 1px solid #ccc;
